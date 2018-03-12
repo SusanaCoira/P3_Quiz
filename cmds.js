@@ -230,7 +230,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
        
 				if(contador===0){ 
         
-         			    log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
+         			    log(`Fin del juego. \n Aciertos ${colorize(score,'magenta')} `); 
 
 		  		   return;
 
