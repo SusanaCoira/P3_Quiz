@@ -211,7 +211,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 	
     };
    
-   	exports.playCmd=rl=>{
+   	/*exports.playCmd=rl=>{
 
      		let score = 0; 
   		let contador = 4; 
@@ -286,7 +286,60 @@ return play(); })
 })
 
    };
+*/
 
+exports.playCmd = rl => {
+	let score = 0;
+	let preguntas = [];
+
+	const play = () => {
+
+		return Promise.resolve()
+		.then (() => {
+			if (preguntas.length <= 0) {
+				log("Fin del juego.");
+				log("Ha obtenido " + score + " aciertos");
+				return;
+			}
+			let pos = Math.round(Math.random()*(preguntas.length -1));
+			let quiz = preguntas[pos];
+			preguntas.splice(pos, 1);
+
+			return makeQuestion(rl, quiz.question)
+			.then(a => {
+				if(a === quiz.answer) {
+					score++;
+					log("Su respusta es correcta");
+					if (preguntas.length > 0){
+					log("Lleva " + score + " aciertos");
+					}		
+					return play();
+
+				} else {
+					log("Su respusta es incorrecta");
+					log("Fin del juego");
+					log("Ha obtenido " + score + " aciertos");
+
+				}
+			})
+		})
+	}
+
+	models.quiz.findAll({raw: true})
+	.then(quizzes => {
+		preguntas = quizzes;
+	})
+	.then(() => {
+		return play();
+	})
+	.catch(e => {
+		console.log("error: " + e);
+	})
+	.then(() => {
+		console.log(score);
+		rl.prompt();
+	})
+};
 
    exports.deleteCmd=(rl,id)=>{
 
