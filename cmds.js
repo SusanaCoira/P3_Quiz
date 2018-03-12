@@ -332,7 +332,7 @@ exports.playCmd = rl => {
 	.then(() => {
 		return play();
 	})
-	.catch(e => {
+	.catch(er => {
 		console.log("error: " + e);
 	})
 	.then(() => {
@@ -415,7 +415,7 @@ errorlog('El quiz es erroneo:');
     
     exports.creditsCmd=rl=>{
     console.log("Autores de la practica:");
-    console.log('nombre 1: susana994');
-    console.log('nombre 2');
+    console.log('nombre 1: Susana Coira');
+   
     rl.prompt();
 };
