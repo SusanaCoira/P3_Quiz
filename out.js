@@ -1,5 +1,7 @@
 const figlet = require('figlet');
 const chalk = require('chalk');
+const readline = require('readline');
+
 
 const colorize = (msg,color)=>{
   if(typeof color !== "undefined"){
@@ -11,20 +13,16 @@ const colorize = (msg,color)=>{
 const log =(msg,color)=>{
   console.log(colorize(msg,color));
 };
-
 const biglog =(msg,color)=>{
   log(figlet.textSync(msg,{horizontalLayout: 'full'}),color);
 };
 const errorlog =(emsg)=>{
   console.log(`${colorize("Error","red")} : ${colorize(emsg,"red")}`);
-  
 };
 
-exports = module.exports = {
-  
+exports = module.exports={
   colorize,
   log,
   biglog,
   errorlog
-  
 };
